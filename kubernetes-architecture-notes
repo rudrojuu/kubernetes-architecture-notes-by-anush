@@ -1,0 +1,88 @@
+## Docker vs Kubernetes
+
+- **Docker** is a **command-line interface (CLI)** used to work with containers.  
+- **Kubernetes** is a **YAML file-based orchestration platform** used to manage containers at scale.
+
+### 🔹 Docker:
+- Docker is a **basic container platform** used to **practice and work with individual containers**.
+- It does **not provide enterprise-level features** like auto-healing, autoscaling, or clustering.
+
+### 🔹 Enterprise-Level Features (which Docker lacks):
+1. Clustering (managing multiple nodes)
+2. Autoscaling
+3. Auto-healing
+4. Enterprise-grade standards and orchestration
+
+### 🔹 Kubernetes:
+- Kubernetes provides **enterprise-level support** for managing containers across multiple machines.
+- It supports features like **clustering, autoscaling, and auto-healing** out of the box.
+- It's more than just a container platform — it's a **container orchestration system**.
+
+---
+
+## Architecture of Kubernetes
+
+Kubernetes consists of the following key components:
+- Cluster
+- Nodes
+- Deployment
+- ReplicaSet
+- Pods
+
+### 🔸 Cluster:
+- A **cluster** is like a **host system** that contains everything needed to run containerized applications.
+- It consists of **nodes (machines)** and is managed by a **control plane** (also called the master).
+
+### 🔸 Node:
+- A **node** is a single machine (VM or physical).
+- There are two types:
+  - **Master Node** – manages the entire cluster.
+  - **Worker Node(s)** – where your applications (pods) actually run.
+
+---
+
+## Master Node Components:
+
+1. **API Server**  
+   - Acts as the **entry point** to the cluster.  
+   - Receives requests from users and tools, and passes them to other components.
+
+2. **Scheduler**  
+   - Decides **which node** will run the pod based on resource availability.
+
+3. **Controller Manager**  
+   - Handles controllers like **ReplicaSet**, which ensures the desired number of pods are running (**auto-healing**).  
+   - Responsible for **maintaining the desired state**.
+
+4. **Cloud Controller Manager**  
+   - Interacts with cloud providers (like AWS, Azure, GCP).  
+   - **Not required for on-premise** Kubernetes setups.
+
+---
+
+## Worker Node Components:
+
+1. **Kubelet**  
+   - Communicates with the master.  
+   - Ensures the containers/pods are running as expected.  
+   - If a pod crashes, Kubelet restarts it (**auto-healing**).
+
+2. **Kube-Proxy**  
+   - Handles **networking**, **load balancing**, and **IP address management** inside the cluster.
+
+3. **Container Runtime**  
+   - Responsible for running the actual containers (e.g., Docker, containerd).
+
+---
+
+## Kubernetes Controller (General Concept):
+
+A **controller** in Kubernetes watches the state described in the YAML file and **tries to match the actual state to the desired state**.
+
+For example:  
+If you define 3 replicas in a YAML file, and only 2 pods are running, the **ReplicaSet controller** will create one more pod to match the desired state.
+
+---
+
+✅ *This summary is based on beginner-friendly, hands-on understanding of Kubernetes architecture. Useful for learning, revision, and interviews.*  
+💻 *Uploaded to GitHub as part of learning documentation.*
